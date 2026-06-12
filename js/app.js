@@ -14,12 +14,12 @@ let currentIndex = 0;
 const markerClusterGroup = L.markerClusterGroup();
 
 const defaultIcon = L.icon({
-    iconUrl:'assets/korea-flag-round.png',
+    iconUrl:'assets/korea-flag.png',
     iconSize:[38,38]
 });
 
 const activeIcon = L.icon({
-    iconUrl:'assets/korea-flag-round.png',
+    iconUrl:'assets/korea-flag.png',
     iconSize:[58,58],
     className:'active-marker'
 });
