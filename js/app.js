@@ -142,10 +142,6 @@ function showMedia(index){
         
         container.appendChild(iframe);
 
-});
-
-container.appendChild(video);
-
     }
 
     document.getElementById('title').textContent =
