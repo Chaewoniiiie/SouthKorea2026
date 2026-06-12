@@ -175,4 +175,10 @@ header h1{
     }
 
 }
+#mediaContainer img{
+    cursor:zoom-in;
+}
 
+#mediaContainer video{
+    cursor:pointer;
+}
