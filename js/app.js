@@ -131,24 +131,29 @@ function showMedia(index){
 
         img.src =
         getDriveImage(props.driveId);
-
+        
         img.alt =
         props.title || '';
-
+        
         container.appendChild(img);
-
     }
     else{
 
-        const video =
-        document.createElement('video');
-
-        video.src =
-        getDriveVideo(props.driveId);
-
+        const video = document.createElement('video');
+        
+        video.src = getDriveVideo(props.driveId);
+        
         video.controls = true;
+        
+        video.addEventListener('dblclick',()=>{
+        
+            if(video.requestFullscreen){
+                video.requestFullscreen();
+            }
 
-        container.appendChild(video);
+});
+
+container.appendChild(video);
 
     }
 
@@ -191,21 +196,7 @@ document.getElementById('prevBtn')
 
 });
 
-document.getElementById('fullscreenBtn')
-.addEventListener('click',()=>{
 
-    const media =
-    document.querySelector(
-        '#mediaContainer img, #mediaContainer video'
-    );
-
-    if(media && media.requestFullscreen){
-
-        media.requestFullscreen();
-
-    }
-
-});
 
 document.addEventListener('keydown',(event)=>{
 
