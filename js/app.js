@@ -84,9 +84,7 @@ function getDriveImage(id){
 }
 
 function getDriveVideo(id){
-
-    return `https://drive.google.com/uc?export=download&id=${id}`;
-
+    return `https://drive.google.com/file/d/${id}/preview`;
 }
 
 function updateActiveMarker(index){
@@ -139,17 +137,20 @@ function showMedia(index){
     }
     else{
 
-        const video = document.createElement('video');
+        const iframe = document.createElement('iframe');
+
+        iframe.src = getDriveVideo(props.driveId);
         
-        video.src = getDriveVideo(props.driveId);
+        iframe.width = "100%";
+        iframe.height = "100%";
         
-        video.controls = true;
+        iframe.allow =
+        "autoplay; fullscreen";
         
-        video.addEventListener('dblclick',()=>{
+        iframe.style.border = "none";
+        iframe.style.borderRadius = "15px";
         
-            if(video.requestFullscreen){
-                video.requestFullscreen();
-            }
+        container.appendChild(iframe);
 
 });
 
