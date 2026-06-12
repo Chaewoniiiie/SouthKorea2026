@@ -35,7 +35,8 @@ fetch('data/locations.geojson')
         showMedia(0);
     }
 
-});
+})
+.catch(error => console.error('Failed to load locations:', error));
 
 function createMarkers(){
 
@@ -215,7 +216,7 @@ document.addEventListener('keydown',(event)=>{
 
         const media =
         document.querySelector(
-            '#mediaContainer img, #mediaContainer video'
+            '#mediaContainer img, #mediaContainer iframe'
         );
 
         if(media){
