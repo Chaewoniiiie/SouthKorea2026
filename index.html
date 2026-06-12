@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Korea Reisegalerie</title>
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet/dist/leaflet.css">
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>🇰🇷 Korea Reisegalerie</h1>
+</header>
+
+<div class="container">
+
+    <section class="gallery-section">
+
+        <div class="media-viewer">
+
+            <button id="prevBtn" class="nav-btn">
+                ❮
+            </button>
+
+            <div id="mediaContainer"></div>
+
+            <button id="nextBtn" class="nav-btn">
+                ❯
+            </button>
+
+        </div>
+
+        <button id="fullscreenBtn">
+            Vollbild
+        </button>
+
+    </section>
+
+    <section class="map-section">
+
+        <div id="map"></div>
+
+        <div class="info-panel">
+
+            <h2 id="title">Titel</h2>
+
+            <p><strong>Datum:</strong> <span id="date"></span></p>
+
+            <p id="description"></p>
+
+        </div>
+
+    </section>
+
+</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+
+<script src="js/app.js"></script>
+
+</body>
+</html>
