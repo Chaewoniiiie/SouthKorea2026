@@ -13,15 +13,24 @@ let currentIndex = 0;
 
 const markerClusterGroup = L.markerClusterGroup();
 
-const defaultIcon = L.icon({
-    iconUrl:'assets/korea-flag.png',
-    iconSize:[38,38]
+const defaultIcon = L.divIcon({
+    html: `
+        <div class="flag-marker">
+            🇰🇷
+        </div>
+    `,
+    className: '',
+    iconSize: [40,40]
 });
 
-const activeIcon = L.icon({
-    iconUrl:'assets/korea-flag.png',
-    iconSize:[58,58],
-    className:'active-marker'
+const activeIcon = L.divIcon({
+    html: `
+        <div class="flag-marker active">
+            🇰🇷
+        </div>
+    `,
+    className: '',
+    iconSize: [55,55]
 });
 
 fetch('data/locations.geojson')
