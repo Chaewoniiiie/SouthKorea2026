@@ -202,7 +202,7 @@ header h1{
 }
 
 #mediaContainer img{
-    cursor:zoom-in;
+    cursor:pointer;
 }
 
 #mediaContainer video{
