@@ -126,7 +126,17 @@ header h1{
     line-height:1.5;
 }
 
+/* Default marker styling - blue point */
+.leaflet-marker-icon {
+    filter: hue-rotate(200deg) brightness(1.2);
+}
+
+/* Active marker styling - Korean flag */
 .active-marker{
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600"><rect fill="%23ffffff" width="900" height="600"/><circle cx="450" cy="300" r="180" fill="%23c60c30"/><path d="M 330 240 L 450 300 L 330 360 Z" fill="%23003478"/><path d="M 450 300 L 570 360 L 450 420 Z" fill="%23003478"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     filter:
     drop-shadow(0 0 8px #60a5fa)
     drop-shadow(0 0 20px #3b82f6);
