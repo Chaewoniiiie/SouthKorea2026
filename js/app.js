@@ -174,6 +174,16 @@ function getDriveVideo(id){
     return `https://drive.google.com/file/d/${id}/preview`;
 }
 
+function toggleFullscreen(element) {
+
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    } else if (element.requestFullscreen) {
+        element.requestFullscreen();
+    }
+
+}
+
 function createDirectionCone(latlng, direction) {
     // Remove existing cone if any
     if (directionCone) {
@@ -330,11 +340,11 @@ function showMedia(index){
         // Disable drag and drop
         img.addEventListener('dragstart', (e) => e.preventDefault());
         
-        img.addEventListener('dblclick',()=>{
-            if(img.requestFullscreen){
-                img.requestFullscreen();
-            }
-        });
+        img.addEventListener('dblclick', () => {
+
+	    img.addEventListener('dblclick', () => {
+		    toggleFullscreen(img);
+		});
         
         container.appendChild(img);
     }
@@ -353,11 +363,12 @@ function showMedia(index){
         iframe.style.border = "none";
         iframe.style.borderRadius = "15px";
         
-        iframe.addEventListener('dblclick',()=>{
-            if(iframe.requestFullscreen){
-                iframe.requestFullscreen();
-            }
-        });
+        iframe.addEventListener('dblclick', () => {
+		    toggleFullscreen(iframe);
+		});
+	   
+
+});
         
         container.appendChild(iframe);
 
@@ -380,7 +391,7 @@ setTimeout(() => {
         markers[index].getLatLng(),
         17,
         {
-            animate: true
+            animate: false
         }
     );
 	    console.log(
@@ -469,17 +480,16 @@ document.addEventListener('keydown',(event)=>{
 
     }
 
-    if(event.key.toLowerCase() === 'f'){
+	if(event.key.toLowerCase() === 'f'){
 
-        const media =
-        document.querySelector(
-            '#mediaContainer img, #mediaContainer iframe'
-        );
-
-        if(media){
-            media.requestFullscreen();
-        }
-
-    }
-
-});
+	    const media =
+	    document.querySelector(
+	        '#mediaContainer img, #mediaContainer iframe'
+	    );
+	
+	    if(media){
+	        toggleFullscreen(media);
+	    }
+	
+	}
+}); 
