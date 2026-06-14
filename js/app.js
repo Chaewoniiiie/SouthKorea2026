@@ -248,13 +248,13 @@ function updateActiveMarker(index){
     // Add direction cone visualization
     createDirectionCone(activeMarker.getLatLng(), direction);
 
-    map.setView(
-        activeMarker.getLatLng(),
-        17,
-        {
-            animate:true
-        }
-    );
+    // map.setView(
+    //     activeMarker.getLatLng(),
+    //     17,
+    //     {
+    //         animate:true
+    //     }
+    // );
 
 }
 
@@ -369,7 +369,22 @@ function showMedia(index){
     // Dynamically build info panel from configured properties
     document.getElementById('infoContent').innerHTML = buildInfoPanel(props);
 
+    
+setTimeout(() => {
+
+    map.invalidateSize();
+
     updateActiveMarker(index);
+
+    map.setView(
+        markers[index].getLatLng(),
+        17,
+        {
+            animate: true
+        }
+    );
+
+}, 100);
 
 }
 
