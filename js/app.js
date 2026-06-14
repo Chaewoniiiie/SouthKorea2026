@@ -19,6 +19,8 @@ const markerClusterGroup = L.markerClusterGroup();
 const INFO_PANEL_PROPERTIES = [
     { key: 'date', label: 'Datum' },
     { key: 'description', label: '' },  // No label for description
+    // Beispiel für mehrere Keys in einer Zeile:
+    // { label: 'Ort', keys: ['stadt', 'bezirk', 'nachbarschaft'], separator: ', ' }
 ];
 
 const defaultIcon = L.icon({
@@ -206,14 +208,26 @@ function updateActiveMarker(index){
 function buildInfoPanel(props) {
     let html = '';
     
-    INFO_PANEL_PROPERTIES.forEach(({ key, label }) => {
-        const value = props[key];
+    INFO_PANEL_PROPERTIES.forEach((config) => {
+        let value = '';
         
-        // Only add the property if it has a value
+        if (config.keys) {
+            // Mehrere keys kombinieren
+            const values = config.keys
+                .map(key => props[key])
+                .filter(v => v && v.toString().trim());  // Nur nicht-leere Werte
+            
+            value = values.join(config.separator || ', ');
+        } else {
+            // Single key
+            value = props[config.key];
+        }
+        
+        // Nur anzeigen wenn Wert vorhanden
         if (value && value.toString().trim()) {
-            if (label) {
+            if (config.label) {
                 // Property with a label
-                html += `<p><strong>${label}:</strong> <span>${value}</span></p>`;
+                html += `<p><strong>${config.label}:</strong> <span>${value}</span></p>`;
             } else {
                 // Property without a label (like description)
                 html += `<p>${value}</p>`;
