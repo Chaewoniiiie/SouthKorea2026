@@ -168,7 +168,7 @@ function createDirectionCone(latlng, direction) {
     // Create polygon with transparent blue fill
     directionCone = L.polygon(conePoints, {
         color: '#3b82f6',
-        weight: 2,
+        weight: 0,
         opacity: 0.6,
         fillColor: '#3b82f6',
         fillOpacity: 0.2,
