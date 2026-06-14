@@ -85,7 +85,7 @@ function showOverview() {
     container.innerHTML = '';
     
     const img = document.createElement('img');
-    img.src = 'https://via.placeholder.com/1000x700?text=Korea+2026+Trip';
+    img.src = 'https://upload.wikimedia.org/wikipedia/commons/0/0f/Flag_of_South_Korea.png';
     img.alt = 'Welcome Overview';
     img.style.objectFit = 'cover';
     
