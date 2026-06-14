@@ -17,8 +17,9 @@ const markerClusterGroup = L.markerClusterGroup();
 
 // Configure which properties should display in the info panel
 const INFO_PANEL_PROPERTIES = [
-    { key: 'date', label: 'Datum' },
-    { key: 'description', label: '' },  // No label for description
+    { label: 'Datum', keys: ['Datum', 'Zeit'], separator: ' ' },
+    { label: 'Ort', keys: ['Stadt', 'Bezirk', 'Nachbarschaft'], separator: ', ' },
+    { key: 'Beschreibung', label: '' },  // No label for description
     // Beispiel für mehrere Keys in einer Zeile:
     // { label: 'Ort', keys: ['stadt', 'bezirk', 'nachbarschaft'], separator: ', ' }
 ];
