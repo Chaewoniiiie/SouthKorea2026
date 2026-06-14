@@ -15,6 +15,12 @@ let isOverviewMode = true;
 
 const markerClusterGroup = L.markerClusterGroup();
 
+// Configure which properties should display in the info panel
+const INFO_PANEL_PROPERTIES = [
+    { key: 'date', label: 'Datum' },
+    { key: 'description', label: '' },  // No label for description
+];
+
 const defaultIcon = L.icon({
     iconUrl:'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"%3E%3Ccircle cx="12" cy="12" r="10" fill="%233b82f6" stroke="white" stroke-width="2"/%3E%3C/svg%3E',
     iconSize:[24,24],
@@ -93,8 +99,7 @@ function showOverview() {
     
     // Update info panel
     document.getElementById('title').textContent = 'Korea Urlaub 2026';
-    document.getElementById('date').textContent = '';
-    document.getElementById('description').textContent = 'Klicken Sie auf einen Marker oder verwenden Sie die Pfeile zum Erkunden';
+    document.getElementById('infoContent').innerHTML = '<p>Klicken Sie auf einen Marker oder verwenden Sie die Pfeile zum Erkunden</p>';
     
     // Clear markers
     markers.forEach(marker => marker.setIcon(defaultIcon));
@@ -194,6 +199,27 @@ function updateActiveMarker(index){
 
 }
 
+function buildInfoPanel(props) {
+    let html = '';
+    
+    INFO_PANEL_PROPERTIES.forEach(({ key, label }) => {
+        const value = props[key];
+        
+        // Only add the property if it has a value
+        if (value && value.toString().trim()) {
+            if (label) {
+                // Property with a label
+                html += `<p><strong>${label}:</strong> <span>${value}</span></p>`;
+            } else {
+                // Property without a label (like description)
+                html += `<p>${value}</p>`;
+            }
+        }
+    });
+    
+    return html;
+}
+
 function showMedia(index){
 
     isOverviewMode = false;
@@ -255,11 +281,8 @@ function showMedia(index){
     document.getElementById('title').textContent =
     props.title || '';
 
-    document.getElementById('date').textContent =
-    props.date || '';
-
-    document.getElementById('description').textContent =
-    props.description || '';
+    // Dynamically build info panel from configured properties
+    document.getElementById('infoContent').innerHTML = buildInfoPanel(props);
 
     updateActiveMarker(index);
 
