@@ -93,7 +93,7 @@ function updateActiveMarker(index){
 
     map.setView(
         activeMarker.getLatLng(),
-        Math.max(map.getZoom(),10),
+        Math.max(map.getZoom(),5),
         {
             animate:true
         }
