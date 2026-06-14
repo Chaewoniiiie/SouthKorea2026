@@ -14,8 +14,9 @@ let currentIndex = 0;
 const markerClusterGroup = L.markerClusterGroup();
 
 const defaultIcon = L.icon({
-    iconUrl:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/1920px-Flag_of_South_Korea.svg.png',
-    iconSize:[24,16]
+    iconUrl:'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"%3E%3Ccircle cx="12" cy="12" r="10" fill="%233b82f6" stroke="white" stroke-width="2"/%3E%3C/svg%3E',
+    iconSize:[24,24],
+    iconAnchor:[12,12]
 });
 
 const activeIcon = L.icon({
