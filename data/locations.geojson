@@ -13,7 +13,7 @@
         "driveId": "13CCBh66cZsLkFNQH09heCI35WnTHfGWr",
         "Stadt": "Seoul",
         "Bezirk":"Yongsan-gu",
-        "Nachbarschaft":"Yongsan2Gadong",
+        "Nachbarschaft":"Yongsan2Gadong"
       },
       "geometry": {
         "type": "Point",
@@ -32,7 +32,7 @@
         "driveId": "17Y7_aka1JQLgnOnStWEtgkuV0bTB6Zed",
         "Stadt": "Busan",
         "Bezirk":"Haeundae-gu",
-        "Nachbarschaft":"U 1(il)-dong",
+        "Nachbarschaft":"U 1(il)-dong"
       },
       "geometry": {
         "type": "Point",
