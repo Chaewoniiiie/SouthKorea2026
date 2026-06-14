@@ -6,6 +6,7 @@
       "properties": {
         "title": "N Seoul Tower",
         "description": "Abendlicher Blick über Seoul",
+        "direction": "60",
         "date": "2025-05-15",
         "type": "image",
         "driveId": "1KeV8ep36XLgGyvNB7D92Yq7itepKru2R"
@@ -20,6 +21,7 @@
       "properties": {
         "title": "Busan Strand",
         "description": "Video vom Strand",
+        "direction": "180",
         "date": "2025-05-17",
         "type": "video",
         "driveId": "17Y7_aka1JQLgnOnStWEtgkuV0bTB6Zed"
