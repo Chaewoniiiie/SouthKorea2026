@@ -10,6 +10,7 @@ L.tileLayer(
 let items = [];
 let markers = [];
 let currentIndex = 0;
+let directionCone = null;
 
 const markerClusterGroup = L.markerClusterGroup();
 
@@ -79,6 +80,62 @@ function getDriveVideo(id){
     return `https://drive.google.com/file/d/${id}/preview`;
 }
 
+function createDirectionCone(latlng, direction) {
+    // Remove existing cone if any
+    if (directionCone) {
+        map.removeLayer(directionCone);
+    }
+
+    // Cone parameters
+    const radius = 300; // meters
+    const coneAngle = 60; // degrees (total cone width)
+    const points = 30; // number of points for smooth cone
+
+    // Create cone polygon points
+    const conePoints = [];
+    
+    // Center point
+    conePoints.push(latlng);
+    
+    // Arc points
+    const halfAngle = coneAngle / 2;
+    for (let i = 0; i <= points; i++) {
+        const angle = (direction - halfAngle) + (i / points) * coneAngle;
+        const bearing = (angle * Math.PI) / 180;
+        
+        const lat = latlng.lat;
+        const lon = latlng.lng;
+        const R = 6371000; // Earth radius in meters
+        
+        const newLat = Math.asin(
+            Math.sin(lat * Math.PI / 180) * Math.cos(radius / R) +
+            Math.cos(lat * Math.PI / 180) * Math.sin(radius / R) * Math.cos(bearing)
+        ) * 180 / Math.PI;
+        
+        const newLon = (lon * Math.PI / 180 + Math.atan2(
+            Math.sin(bearing) * Math.sin(radius / R) * Math.cos(lat * Math.PI / 180),
+            Math.cos(radius / R) - Math.sin(lat * Math.PI / 180) * Math.sin(newLat * Math.PI / 180)
+        )) * 180 / Math.PI;
+        
+        conePoints.push(L.latLng(newLat, newLon));
+    }
+    
+    // Close the polygon
+    conePoints.push(latlng);
+
+    // Create polygon with transparent blue fill
+    directionCone = L.polygon(conePoints, {
+        color: '#3b82f6',
+        weight: 2,
+        opacity: 0.6,
+        fillColor: '#3b82f6',
+        fillOpacity: 0.2,
+        interactive: false
+    });
+
+    directionCone.addTo(map);
+}
+
 function updateActiveMarker(index){
 
     markers.forEach(marker=>{
@@ -90,6 +147,12 @@ function updateActiveMarker(index){
     const activeMarker = markers[index];
 
     activeMarker.setIcon(activeIcon);
+
+    const item = items[index];
+    const direction = item.properties.direction || 0;
+
+    // Add direction cone visualization
+    createDirectionCone(activeMarker.getLatLng(), direction);
 
     map.setView(
         activeMarker.getLatLng(),
