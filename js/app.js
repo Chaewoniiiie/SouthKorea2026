@@ -383,6 +383,15 @@ setTimeout(() => {
             animate: true
         }
     );
+	    console.log(
+        'Map center:',
+        map.getCenter()
+    );
+
+    console.log(
+        'Marker:',
+        markers[index].getLatLng()
+    );
 
 }, 100);
 
