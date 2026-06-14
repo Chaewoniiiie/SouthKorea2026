@@ -94,7 +94,12 @@ function createMarkers(){
                 icon:defaultIcon
             }
         );
-
+		 marker.bindTooltip(item.properties.title || '', {
+            permanent: false,
+            direction: 'top',
+            offset: [0, -10],
+            className: 'marker-tooltip'
+        });
         marker.on('click',()=>{
             isOverviewMode = false;
             showMedia(index);
