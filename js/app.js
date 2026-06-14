@@ -27,7 +27,36 @@ var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest
 	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
 });
 
+const hotelIcon = L.icon({
+    iconUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"%3E%3Ccircle cx="12" cy="12" r="10" fill="white" stroke="%23333" stroke-width="2"/%3E%3Cpath fill="%23333" d="M7 13h10v2H7zm1-3h2v2H8zm6 0h2v2h-2zM8 9h8v2H8z"/%3E%3C/svg%3E',
+    iconSize: [28, 28],
+    iconAnchor: [14, 14]
+});
 
+let hotelLayer;
+fetch('data/Unterkuenfte.geojson')
+.then(response => response.json())
+.then(data => {
+
+    const hotelLayer = L.geoJSON(data, {
+        pointToLayer: function(feature, latlng) {
+
+            const marker = L.marker(latlng, {
+                icon: hotelIcon
+            });
+
+            marker.bindTooltip(feature.properties?.name || 'Unterkunft', {
+                direction: 'top'
+            });
+
+            return marker;
+        }
+    });
+
+    hotelLayer.addTo(map);
+
+})
+.catch(err => console.error('Hotel layer error:', err));
 var baseMaps = {
     "OpenStreetMap": OpenStreetMap_DE,
 	"Carto Voyager": CartoDB_VoyagerLabelsUnder,
@@ -35,13 +64,17 @@ var baseMaps = {
     "Google Satellit": googleSat,
     "Esri World Imagery": Esri_WorldImagery
 };
-var layerControl = L.control.layers(baseMaps).addTo(map);
+const overlays = {
+    "Unterkünfte": hotelLayer
+};
+var layerControl = L.control.layers(baseMaps,overlays).addTo(map);
 
 let items = [];
 let markers = [];
 let currentIndex = -1;
 let directionCone = null;
 let isOverviewMode = true;
+
 
 const markerClusterGroup = L.markerClusterGroup();
 
@@ -66,6 +99,7 @@ const activeIcon = L.icon({
     className:'active-marker'
 });
 
+
 fetch('data/locations.geojson')
 .then(response => response.json())
 .then(data => {
@@ -80,6 +114,9 @@ fetch('data/locations.geojson')
 
 })
 .catch(error => console.error('Failed to load locations:', error));
+
+
+
 
 function createMarkers(){
 
