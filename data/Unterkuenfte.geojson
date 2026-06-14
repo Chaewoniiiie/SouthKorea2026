@@ -4,40 +4,40 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Hotel Example Seoul",
-        "image":"",
-        "Zeit":"",
-        "description": "Zentral gelegenes Hotel mit guter Anbindung."
+        "name": "Beyond Residence Jogno",
+        "image":"https://cf.bstatic.com/xdata/images/hotel/max1024x768/537834257.jpg?k=c4c9544e2b3c4d7ce2c7c4afaea842c0247f2a853d256265db6e947fd1584660&o=",
+        "Zeit":"22.05.2026 - 26.05.2026",
+        "Adresse": "18, Supyo-ro 26-gil, Jongno-gu, Jongno-Gu, Seoul"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [126.9780, 37.5665]
+        "coordinates": [126.99006202601764, 37.572121002930324] 
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "name": "Guesthouse Namsan View",
-        "image":"",
-        "Zeit":"",
-        "description": "Kleine Unterkunft mit Blick auf den Namsan Tower."
+        "name": "Ark Blue Hotel",
+        "image":"https://cf.bstatic.com/xdata/images/hotel/max1024x768/820014583.jpg?k=fbd395165d667eaf7eae0a92b2d63d18bc0955900cc30aeefa85bf396f0d5dc3&o=",
+        "Zeit":"26.05.2026 - 30.05.2026",
+        "Adresse": "25, Haeundaehaebyeon-ro 209beonga-gil, Haeundae-gu, Busan"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [126.9900, 37.5512]
+        "coordinates": [129.15666860994298, 35.15960375601775] 
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "name": "Hanok Stay Bukchon",
-        "image":"",
-        "Zeit":"",
-        "description": "Traditionelles koreanisches Hanok-Haus im historischen Viertel Bukchon."
+        "name": "Stay 42 Dongmyo",
+        "image":"https://stay-42-dongmyo.seoulhotelskorea.com/data/Photos/700x500w/17010/1701083/1701083846.JPEG",
+        "Zeit":"30.05.2026 - 03.06.2026",
+        "Adresse": "17, Jong-ro 65ga-gil, Jongno-gu, Jongno-Gu, Seoul"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [126.9845, 37.5820]
+        "coordinates": [127.01933742970499, 37.57492791799665] 
       }
     }
   ]
