@@ -48,7 +48,7 @@ const markerClusterGroup = L.markerClusterGroup();
 // Configure which properties should display in the info panel
 const INFO_PANEL_PROPERTIES = [
     { label: 'Datum', keys: ['Datum', 'Zeit'], separator: 'um ' },
-    { label: 'Ort', keys: ['Stadt', 'Bezirk', 'Nachbarschaft'], separator: ', ' },
+    { label: 'Ort (Administrativ)', keys: ['Stadt', 'Bezirk', 'Nachbarschaft'], separator: ', ' },
     { key: 'Beschreibung', label: '' },  // No label for description
     // Beispiel für mehrere Keys in einer Zeile:
     // { label: 'Ort', keys: ['stadt', 'bezirk', 'nachbarschaft'], separator: ', ' }
@@ -140,6 +140,28 @@ function showOverview() {
     
     // Clear markers
     markers.forEach(marker => marker.setIcon(defaultIcon));
+}
+
+function formatDateTime(dateStr, timeStr) {
+
+    const [day, month, year] = dateStr.split('.');
+
+    const date = new Date(
+        `${year}-${month}-${day}T${timeStr || '00:00:00'}`
+    );
+
+    let formatted = date.toLocaleDateString('de-DE', {
+        weekday: 'long',
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    });
+
+    formatted =
+        formatted.charAt(0).toUpperCase() +
+        formatted.slice(1);
+
+    return `${formatted} um ${timeStr.substring(0,5)} Uhr`;
 }
 
 function getDriveImage(id){
@@ -243,13 +265,21 @@ function buildInfoPanel(props) {
         let value = '';
         
         if (config.keys) {
-            // Mehrere keys kombinieren
-            const values = config.keys
-                .map(key => props[key])
-                .filter(v => v && v.toString().trim());  // Nur nicht-leere Werte
-            
-            value = values.join(config.separator || ', ');
-        } else {
+
+		    // Sonderbehandlung für Datum + Zeit
+		    if (
+		        config.label === 'Datum' &&
+		        props.Datum
+		    ) {
+		        value = formatDateTime(props.Datum, props.Zeit);
+		    } else {
+		        const values = config.keys
+		            .map(key => props[key])
+		            .filter(v => v && v.toString().trim());
+		
+		        value = values.join(config.separator || ', ');
+		    }
+		}else {
             // Single key
             value = props[config.key];
         }
