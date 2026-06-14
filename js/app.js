@@ -95,6 +95,10 @@ function showOverview() {
     img.alt = 'Welcome Overview';
     img.style.objectFit = 'cover';
     
+    // Disable context menu for welcome image
+    img.addEventListener('contextmenu', (e) => e.preventDefault());
+    img.addEventListener('dragstart', (e) => e.preventDefault());
+    
     container.appendChild(img);
     
     // Update info panel
@@ -244,6 +248,12 @@ function showMedia(index){
         
         img.alt =
         props.title || '';
+        
+        // Disable right-click context menu
+        img.addEventListener('contextmenu', (e) => e.preventDefault());
+        
+        // Disable drag and drop
+        img.addEventListener('dragstart', (e) => e.preventDefault());
         
         img.addEventListener('dblclick',()=>{
             if(img.requestFullscreen){
