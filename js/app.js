@@ -48,7 +48,24 @@ fetch('data/Unterkuenfte.geojson')
             marker.bindTooltip(feature.properties?.name || 'Unterkunft', {
                 direction: 'top'
             });
-
+			 marker.bindPopup(`
+	            <div style="min-width:150px">
+	                <strong>${feature.properties.name}</strong><br>
+					<img 
+			            src="${feature.properties.image}" 
+			            alt="${feature.properties.name}"
+			            style="
+			                width:100%;
+			                height:120px;
+			                object-fit:cover;
+			                border-radius:8px;
+			                margin-bottom:8px;
+			            "
+			        />
+	                <span>Zeitraum: ${feature.properties.Zeit}</span><br>
+	                <p style="margin-top:6px">${feature.properties.Adresse || ''}</p>
+	            </div>
+        `);
             return marker;
         }
     });
