@@ -268,11 +268,7 @@ header h1 {
   box-shadow: var(--shadow-sm);
 }
 
-.info-panel:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateX(4px);
-  background: #fafafa;
-}
+
 
 .info-panel h2 {
   margin-bottom: 0.75rem;
