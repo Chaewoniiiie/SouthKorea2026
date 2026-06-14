@@ -5,8 +5,8 @@
       "type": "Feature",
       "properties": {
         "name": "Hotel Example Seoul",
-        "type": "hotel",
-        "rating": 4,
+        "image":"",
+        "Zeit":"",
         "description": "Zentral gelegenes Hotel mit guter Anbindung."
       },
       "geometry": {
@@ -18,8 +18,8 @@
       "type": "Feature",
       "properties": {
         "name": "Guesthouse Namsan View",
-        "type": "guesthouse",
-        "rating": 3,
+        "image":"",
+        "Zeit":"",
         "description": "Kleine Unterkunft mit Blick auf den Namsan Tower."
       },
       "geometry": {
@@ -31,8 +31,8 @@
       "type": "Feature",
       "properties": {
         "name": "Hanok Stay Bukchon",
-        "type": "hanok",
-        "rating": 5,
+        "image":"",
+        "Zeit":"",
         "description": "Traditionelles koreanisches Hanok-Haus im historischen Viertel Bukchon."
       },
       "geometry": {
