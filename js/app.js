@@ -16,7 +16,7 @@ var CartoDB_DarkMatter = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all
 	subdomains: 'abcd',
 	maxZoom: 20
 });
-var googleSat = L.tileLayer('http://{s}.google.com/vt?lyrs=s&x={x}&y={y}&z={z}',{
+var googleSat = L.tileLayer('https://{s}.google.com/vt?lyrs=s&x={x}&y={y}&z={z}',{
     maxZoom: 21,
     subdomains:['mt0','mt1','mt2','mt3']
 	
@@ -26,6 +26,15 @@ var googleSat = L.tileLayer('http://{s}.google.com/vt?lyrs=s&x={x}&y={y}&z={z}',
 var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
 	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
 });
+var baseMaps = {
+    "OpenStreetMap": OpenStreetMap_DE,
+	"Carto Voyager": CartoDB_VoyagerLabelsUnder,
+	"Carto Dark": CartoDB_DarkMatter,
+    "Google Satellit": googleSat,
+    "Esri World Imagery": Esri_WorldImagery
+};
+
+var layerControl = L.control.layers(baseMaps,overlays).addTo(map);
 
 const hotelIcon = L.icon({
     iconUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"%3E%3Ccircle cx="12" cy="12" r="10" fill="white" stroke="%23333" stroke-width="2"/%3E%3Cpath fill="%23333" d="M7 13h10v2H7zm1-3h2v2H8zm6 0h2v2h-2zM8 9h8v2H8z"/%3E%3C/svg%3E',
@@ -38,13 +47,17 @@ fetch('data/Unterkuenfte.geojson')
 .then(response => response.json())
 .then(data => {
 
-    const hotelLayer = L.geoJSON(data, {
+    hotelLayer = L.geoJSON(data, {
         pointToLayer: function(feature, latlng) {
 
             const marker = L.marker(latlng, {
                 icon: hotelIcon
             });
-
+			
+			hotelLayer.addTo(map);
+			
+			layerControl.addOverlay(hotelLayer, "Unterkünfte");
+			
             marker.bindTooltip(feature.properties?.name || 'Unterkunft', {
                 direction: 'top'
             });
@@ -74,17 +87,7 @@ fetch('data/Unterkuenfte.geojson')
 
 })
 .catch(err => console.error('Hotel layer error:', err));
-var baseMaps = {
-    "OpenStreetMap": OpenStreetMap_DE,
-	"Carto Voyager": CartoDB_VoyagerLabelsUnder,
-	"Carto Dark": CartoDB_DarkMatter,
-    "Google Satellit": googleSat,
-    "Esri World Imagery": Esri_WorldImagery
-};
-const overlays = {
-    "Unterkünfte": hotelLayer
-};
-var layerControl = L.control.layers(baseMaps,overlays).addTo(map);
+
 
 let items = [];
 let markers = [];
@@ -368,103 +371,63 @@ function buildInfoPanel(props) {
     return html;
 }
 
-function showMedia(index){
+function showMedia(index) {
 
     isOverviewMode = false;
     currentIndex = index;
 
     const item = items[index];
-
     const props = item.properties;
 
-    const container =
-    document.getElementById('mediaContainer');
-
+    const container = document.getElementById('mediaContainer');
     container.innerHTML = '';
 
-    if(props.type === 'image'){
+    if (props.type === 'image') {
 
-        const img =
-        document.createElement('img');
+        const img = document.createElement('img');
+        img.src = getDriveImage(props.driveId);
+        img.alt = props.title || '';
 
-        img.src =
-        getDriveImage(props.driveId);
-        
-        img.alt =
-        props.title || '';
-        
-        // Disable right-click context menu
-        img.addEventListener('contextmenu', (e) => e.preventDefault());
-        
-        // Disable drag and drop
-        img.addEventListener('dragstart', (e) => e.preventDefault());
-        
-        img.addEventListener('dblclick', () => {
+        img.addEventListener('contextmenu', e => e.preventDefault());
+        img.addEventListener('dragstart', e => e.preventDefault());
+        img.addEventListener('dblclick', () => toggleFullscreen(img));
 
-	    img.addEventListener('dblclick', () => {
-		    toggleFullscreen(img);
-		});
-        
         container.appendChild(img);
-    }
-    else{
+
+    } else {
 
         const iframe = document.createElement('iframe');
-
         iframe.src = getDriveVideo(props.driveId);
-        
         iframe.width = "100%";
         iframe.height = "100%";
-        
-        iframe.allow =
-        "autoplay; fullscreen";
-        
+        iframe.allow = "autoplay; fullscreen";
         iframe.style.border = "none";
         iframe.style.borderRadius = "15px";
-        
-        iframe.addEventListener('dblclick', () => {
-		    toggleFullscreen(iframe);
-		});
-	   
 
-});
-        
+        iframe.addEventListener('dblclick', () => toggleFullscreen(iframe));
+
         container.appendChild(iframe);
-
     }
 
-    document.getElementById('title').textContent =
-    props.title || '';
+    document.getElementById('title').textContent = props.title || '';
 
-    // Dynamically build info panel from configured properties
     document.getElementById('infoContent').innerHTML = buildInfoPanel(props);
 
-    
-setTimeout(() => {
+    setTimeout(() => {
 
-    map.invalidateSize();
+        map.invalidateSize();
+        updateActiveMarker(index);
 
-    updateActiveMarker(index);
+        map.flyTo(
+            markers[index].getLatLng(),
+            17,
+            { duration: 1.2,easeLinearity: 0.2 }
+        );
 
-    map.setView(
-        markers[index].getLatLng(),
-        17,
-        {
-            animate: false
-        }
-    );
-	    console.log(
-        'Map center:',
-        map.getCenter()
-    );
+        console.log('Map center:', map.getCenter());
+        console.log('Marker:', markers[index].getLatLng());
 
-    console.log(
-        'Marker:',
-        markers[index].getLatLng()
-    );
-
-}, 100);
-
+    }, 100);
 }
 
 document.getElementById('nextBtn')
