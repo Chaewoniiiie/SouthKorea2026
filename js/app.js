@@ -125,6 +125,12 @@ function showMedia(index){
         img.alt =
         props.title || '';
         
+        img.addEventListener('dblclick',()=>{
+            if(img.requestFullscreen){
+                img.requestFullscreen();
+            }
+        });
+        
         container.appendChild(img);
     }
     else{
@@ -141,6 +147,12 @@ function showMedia(index){
         
         iframe.style.border = "none";
         iframe.style.borderRadius = "15px";
+        
+        iframe.addEventListener('dblclick',()=>{
+            if(iframe.requestFullscreen){
+                iframe.requestFullscreen();
+            }
+        });
         
         container.appendChild(iframe);
 
