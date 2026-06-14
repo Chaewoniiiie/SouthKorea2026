@@ -9,6 +9,8 @@ body{
     background:#0f172a;
     color:white;
     min-height:100vh;
+    display:flex;
+    flex-direction:column;
 }
 
 header{
@@ -16,6 +18,7 @@ header{
     padding:20px;
     background:#111827;
     border-bottom:1px solid rgba(255,255,255,.1);
+    flex-shrink:0;
 }
 
 header h1{
@@ -27,6 +30,8 @@ header h1{
     grid-template-columns:1.4fr 1fr;
     gap:20px;
     padding:20px;
+    flex:1;
+    min-height:0;
 }
 
 .gallery-section,
@@ -34,15 +39,28 @@ header h1{
     background:#1e293b;
     border-radius:20px;
     padding:20px;
+    display:flex;
+    flex-direction:column;
+    min-height:0;
+}
+
+.gallery-section{
+    flex:1;
+}
+
+.map-section{
+    flex:1;
+    overflow-y:auto;
 }
 
 .media-viewer{
     position:relative;
-    height:650px;
+    flex:1;
     display:flex;
     justify-content:center;
     align-items:center;
     overflow:hidden;
+    min-height:0;
 }
 
 #mediaContainer{
@@ -99,6 +117,7 @@ header h1{
     font-size:16px;
     background:#2563eb;
     color:white;
+    flex-shrink:0;
 }
 
 #fullscreenBtn:hover{
@@ -106,8 +125,9 @@ header h1{
 }
 
 #map{
-    height:500px;
+    flex:1;
     border-radius:16px;
+    min-height:300px;
 }
 
 .info-panel{
@@ -115,6 +135,7 @@ header h1{
     background:#111827;
     padding:15px;
     border-radius:15px;
+    flex-shrink:0;
 }
 
 .info-panel h2{
@@ -149,10 +170,37 @@ header h1{
     }
 
     .media-viewer{
-        height:400px;
+        min-height:300px;
+    }
+
+    #map{
+        min-height:250px;
     }
 
 }
+
+@media(max-width:640px){
+
+    .container{
+        padding:10px;
+        gap:10px;
+    }
+
+    .gallery-section,
+    .map-section{
+        padding:15px;
+    }
+
+    header h1{
+        font-size:1.5rem;
+    }
+
+    #map{
+        min-height:200px;
+    }
+
+}
+
 #mediaContainer img{
     cursor:zoom-in;
 }
