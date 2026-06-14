@@ -50,6 +50,7 @@ body {
   display: flex;
   flex-direction: column;
   line-height: 1.6;
+  overflow: hidden;
 }
 
 /* ========== Header ========== */
@@ -92,7 +93,8 @@ header h1 {
   gap: 1.5rem;
   padding: 1.5rem;
   flex: 1;
-  height: 0;
+  min-height: 0;
+  overflow: hidden;
 }
 
 /* ========== Sections ========== */
@@ -127,7 +129,7 @@ header h1 {
 
 .map-section {
   flex: 1;
-  overflow-y: auto;
+  overflow: hidden;
   border: 1px solid var(--border-color);
 }
 
@@ -139,7 +141,8 @@ header h1 {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  min-height: 0;
+  height: 100%;
+  width: 100%;
   border-radius: var(--radius-md);
   background: #fafafa;
   border: 1px solid var(--border-color);
@@ -167,11 +170,6 @@ header h1 {
   box-shadow: var(--shadow-sm);
 }
 
-#mediaContainer img:hover,
-#mediaContainer video:hover {
-  transform: scale(1.02);
-  box-shadow: var(--shadow-md);
-}
 
 /* ========== Navigation Buttons ========== */
 .nav-btn {
