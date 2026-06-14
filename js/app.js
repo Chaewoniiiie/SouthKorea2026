@@ -9,8 +9,9 @@ L.tileLayer(
 
 let items = [];
 let markers = [];
-let currentIndex = 0;
+let currentIndex = -1;
 let directionCone = null;
+let isOverviewMode = true;
 
 const markerClusterGroup = L.markerClusterGroup();
 
@@ -25,6 +26,7 @@ const activeIcon = L.icon({
     iconSize:[36,24],
     className:'active-marker'
 });
+
 fetch('data/locations.geojson')
 .then(response => response.json())
 .then(data => {
@@ -34,7 +36,7 @@ fetch('data/locations.geojson')
     createMarkers();
 
     if(items.length > 0){
-        showMedia(0);
+        showOverview();
     }
 
 })
@@ -55,9 +57,8 @@ function createMarkers(){
         );
 
         marker.on('click',()=>{
-
+            isOverviewMode = false;
             showMedia(index);
-
         });
 
         markers.push(marker);
@@ -68,6 +69,35 @@ function createMarkers(){
 
     map.addLayer(markerClusterGroup);
 
+}
+
+function showOverview() {
+    isOverviewMode = true;
+    currentIndex = -1;
+    
+    // Fit map to show all markers
+    if (markerClusterGroup.getLayers().length > 0) {
+        map.fitBounds(markerClusterGroup.getBounds(), { padding: [50, 50], animate: false });
+    }
+
+    // Show welcome image in media container
+    const container = document.getElementById('mediaContainer');
+    container.innerHTML = '';
+    
+    const img = document.createElement('img');
+    img.src = 'https://via.placeholder.com/1000x700?text=Korea+2026+Trip';
+    img.alt = 'Welcome Overview';
+    img.style.objectFit = 'cover';
+    
+    container.appendChild(img);
+    
+    // Update info panel
+    document.getElementById('title').textContent = 'Korea Urlaub 2026';
+    document.getElementById('date').textContent = '';
+    document.getElementById('description').textContent = 'Klicken Sie auf einen Marker oder verwenden Sie die Pfeile zum Erkunden';
+    
+    // Clear markers
+    markers.forEach(marker => marker.setIcon(defaultIcon));
 }
 
 function getDriveImage(id){
@@ -166,6 +196,7 @@ function updateActiveMarker(index){
 
 function showMedia(index){
 
+    isOverviewMode = false;
     currentIndex = index;
 
     const item = items[index];
@@ -237,26 +268,36 @@ function showMedia(index){
 document.getElementById('nextBtn')
 .addEventListener('click',()=>{
 
-    currentIndex++;
+    if (isOverviewMode) {
+        // First click from overview goes to first item
+        showMedia(0);
+    } else {
+        currentIndex++;
 
-    if(currentIndex >= items.length){
-        currentIndex = 0;
+        if(currentIndex >= items.length){
+            showOverview();
+        } else {
+            showMedia(currentIndex);
+        }
     }
-
-    showMedia(currentIndex);
 
 });
 
 document.getElementById('prevBtn')
 .addEventListener('click',()=>{
 
-    currentIndex--;
+    if (isOverviewMode) {
+        // From overview, go to last item
+        showMedia(items.length - 1);
+    } else {
+        currentIndex--;
 
-    if(currentIndex < 0){
-        currentIndex = items.length - 1;
+        if(currentIndex < 0){
+            showOverview();
+        } else {
+            showMedia(currentIndex);
+        }
     }
-
-    showMedia(currentIndex);
 
 });
 
@@ -266,25 +307,33 @@ document.addEventListener('keydown',(event)=>{
 
     if(event.key === 'ArrowRight'){
 
-        currentIndex++;
+        if (isOverviewMode) {
+            showMedia(0);
+        } else {
+            currentIndex++;
 
-        if(currentIndex >= items.length){
-            currentIndex = 0;
+            if(currentIndex >= items.length){
+                showOverview();
+            } else {
+                showMedia(currentIndex);
+            }
         }
-
-        showMedia(currentIndex);
 
     }
 
     if(event.key === 'ArrowLeft'){
 
-        currentIndex--;
+        if (isOverviewMode) {
+            showMedia(items.length - 1);
+        } else {
+            currentIndex--;
 
-        if(currentIndex < 0){
-            currentIndex = items.length - 1;
+            if(currentIndex < 0){
+                showOverview();
+            } else {
+                showMedia(currentIndex);
+            }
         }
-
-        showMedia(currentIndex);
 
     }
 
