@@ -5,11 +5,15 @@
       "type": "Feature",
       "properties": {
         "title": "N Seoul Tower",
-        "description": "Abendlicher Blick über Seoul",
+        "Beschreibung": "Abendlicher Blick über Seoul",
         "direction": "60",
-        "date": "2025-05-15",
+        "Datum": "21.05.2026",
+        "Zeit": "11:11:11",
         "type": "image",
-        "driveId": "13CCBh66cZsLkFNQH09heCI35WnTHfGWr"
+        "driveId": "13CCBh66cZsLkFNQH09heCI35WnTHfGWr",
+        "Stadt": "Seoul",
+        "Bezirk":"Yongsan-gu",
+        "Nachbarschaft":"Yongsan2Gadong",
       },
       "geometry": {
         "type": "Point",
@@ -20,11 +24,15 @@
       "type": "Feature",
       "properties": {
         "title": "Busan Strand",
-        "description": "Video vom Strand",
+        "Beschreibung": "Video vom Strand",
         "direction": "180",
-        "date": "2025-05-17",
+        "Datum": "27.05.2026",
+        "Zeit": "11:11:11",
         "type": "video",
-        "driveId": "17Y7_aka1JQLgnOnStWEtgkuV0bTB6Zed"
+        "driveId": "17Y7_aka1JQLgnOnStWEtgkuV0bTB6Zed",
+        "Stadt": "Busan",
+        "Bezirk":"Haeundae-gu",
+        "Nachbarschaft":"U 1(il)-dong",
       },
       "geometry": {
         "type": "Point",
