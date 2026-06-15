@@ -58,6 +58,7 @@ fetch('data/Unterkuenfte.geojson')
                 permanent: false,
             	direction: 'top',
             	offset: [0, -10],
+				className: 'marker-tooltip'
             });
 			 marker.bindPopup(`
 	            <div style="min-width:150px">
