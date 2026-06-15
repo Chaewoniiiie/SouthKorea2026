@@ -82,7 +82,7 @@ fetch('data/Unterkuenfte.geojson')
 		
     });
 
-    hotelLayer.addTo(map);
+    // hotelLayer.addTo(map);
     layerControl.addOverlay(hotelLayer, "Unterkünfte");
 
 })
