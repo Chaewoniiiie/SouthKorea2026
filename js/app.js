@@ -54,10 +54,6 @@ fetch('data/Unterkuenfte.geojson')
                 icon: hotelIcon
             });
 			
-			hotelLayer.addTo(map);
-			
-			layerControl.addOverlay(hotelLayer, "Unterkünfte");
-			
             marker.bindTooltip(feature.properties?.name || 'Unterkunft', {
                 direction: 'top'
             });
@@ -81,9 +77,11 @@ fetch('data/Unterkuenfte.geojson')
         `);
             return marker;
         }
+		
     });
 
     hotelLayer.addTo(map);
+    layerControl.addOverlay(hotelLayer, "Unterkünfte");
 
 })
 .catch(err => console.error('Hotel layer error:', err));
