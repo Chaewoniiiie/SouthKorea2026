@@ -34,7 +34,7 @@ var baseMaps = {
     "Esri World Imagery": Esri_WorldImagery
 };
 
-var layerControl = L.control.layers(baseMaps,overlays).addTo(map);
+var layerControl = L.control.layers(baseMaps).addTo(map);
 
 const hotelIcon = L.icon({
     iconUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"%3E%3Ccircle cx="12" cy="12" r="10" fill="white" stroke="%23333" stroke-width="2"/%3E%3Cpath fill="%23333" d="M7 13h10v2H7zm1-3h2v2H8zm6 0h2v2h-2zM8 9h8v2H8z"/%3E%3C/svg%3E',
