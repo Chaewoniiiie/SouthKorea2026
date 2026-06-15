@@ -55,7 +55,8 @@ fetch('data/Unterkuenfte.geojson')
             });
 			
             marker.bindTooltip(feature.properties?.name || 'Unterkunft', {
-                direction: 'top'
+                direction: 'top',
+				className: 'marker-tooltip'
             });
 			 marker.bindPopup(`
 	            <div style="min-width:150px">
