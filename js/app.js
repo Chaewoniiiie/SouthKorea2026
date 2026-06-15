@@ -55,12 +55,13 @@ fetch('data/Unterkuenfte.geojson')
             });
 			
             marker.bindTooltip(feature.properties?.name || 'Unterkunft', {
-                direction: 'top',
-				className: 'marker-tooltip'
+                permanent: false,
+            	direction: 'top',
+            	offset: [0, -10],
             });
 			 marker.bindPopup(`
 	            <div style="min-width:150px">
-	                <strong>${feature.properties.name}</strong><br>
+	                <h2>${feature.properties.name}</h2><br>
 					<img 
 			            src="${feature.properties.image}" 
 			            alt="${feature.properties.name}"
@@ -72,8 +73,8 @@ fetch('data/Unterkuenfte.geojson')
 			                margin-bottom:8px;
 			            "
 			        />
-	                <span>Zeitraum: ${feature.properties.Zeit}</span><br>
-	                <p style="margin-top:6px">${feature.properties.Adresse || ''}</p>
+	                <span><strong>Zeitraum:</strong> ${feature.properties.Zeit}</span><br>
+	                <p style="margin-top:6px"><strong>Adresse:</strong> ${feature.properties.Adresse || ''}</p>
 	            </div>
         `);
             return marker;
