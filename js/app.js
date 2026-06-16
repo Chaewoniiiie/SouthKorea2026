@@ -218,7 +218,7 @@ function showOverview() {
 
 function formatDateTime(dateStr, timeStr) {
 
-    const [day, month, year] = dateStr.split('-');
+    const [year, month, day ] = dateStr.split('-');
 
     const date = new Date(
         `${year}-${month}-${day}T${timeStr || '00:00:00'}`
