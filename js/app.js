@@ -97,7 +97,7 @@ let directionCone = null;
 let isOverviewMode = true;
 
 
-const markerClusterGroup = L.markerClusterGroup();
+const markerClusterGroup = L.markerClusterGroup({disableClusteringAtZoom: 16});
 
 // Configure which properties should display in the info panel
 const INFO_PANEL_PROPERTIES = [
