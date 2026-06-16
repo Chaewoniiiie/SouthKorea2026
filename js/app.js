@@ -121,10 +121,10 @@ const defaultIcon = L.icon({
 //     className:'active-marker'
 // });
 const activeIcon = L.icon({
-    iconUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"%3E%3Ccircle cx="16" cy="16" r="15" fill="%233b82f6"/%3E%3Cpath fill="white" d="M12 10l1.5 2H20a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2zm4 3a4 4 0 1 0 0 8a4 4 0 0 0 0-8zm0 2a2 2 0 1 1 0 4a2 2 0 0 1 0-4z"/%3E%3C/svg%3E',
-    iconSize: [36, 36],
-    iconAnchor: [18, 18],
-    className: 'active-marker'
+    iconUrl:'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"%3E%3Ccircle cx="20" cy="20" r="18" fill="%233b82f6" stroke="white" stroke-width="3"/%3E%3Cpath d="M12 16h4l2-3h4l2 3h4a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2z" fill="none" stroke="white" stroke-width="2"/%3E%3Ccircle cx="20" cy="22" r="4" fill="none" stroke="white" stroke-width="2"/%3E%3C/svg%3E',
+    iconSize:[40,40],
+    iconAnchor:[20,20],
+	className:'active-marker'
 });
 
 fetch('data/locations.geojson')
