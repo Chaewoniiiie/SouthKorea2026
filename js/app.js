@@ -114,12 +114,18 @@ const defaultIcon = L.icon({
     iconAnchor:[12,12]
 });
 
+// Altes Icon mit SüdKorea Flagge
+// const activeIcon = L.icon({
+//     iconUrl:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/1920px-Flag_of_South_Korea.svg.png',
+//     iconSize:[27,18],
+//     className:'active-marker'
+// });
 const activeIcon = L.icon({
-    iconUrl:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/1920px-Flag_of_South_Korea.svg.png',
-    iconSize:[27,18],
-    className:'active-marker'
+    iconUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"%3E%3Ccircle cx="16" cy="16" r="15" fill="%233b82f6"/%3E%3Cpath fill="white" d="M12 10l1.5 2H20a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2zm4 3a4 4 0 1 0 0 8a4 4 0 0 0 0-8zm0 2a2 2 0 1 1 0 4a2 2 0 0 1 0-4z"/%3E%3C/svg%3E',
+    iconSize: [36, 36],
+    iconAnchor: [18, 18],
+    className: 'active-marker'
 });
-
 
 fetch('data/locations.geojson')
 .then(response => response.json())
