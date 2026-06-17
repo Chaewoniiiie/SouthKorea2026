@@ -335,10 +335,11 @@ function updateActiveMarker(index){
 	    item.geometry.coordinates[0]
 	);
 	
-	createDirectionCone(
-	    originalLatLng,
-	    direction
-	);
+
+	
+    // map.once('moveend', () => {
+    //     createDirectionCone(originalLatLng, direction);
+    // });
 
     // map.setView(
     //     activeMarker.getLatLng(),
@@ -448,14 +449,17 @@ function showMedia(index) {
 		    item.geometry.coordinates[1],
 		    item.geometry.coordinates[0]
 		));
+
+		updateActiveMarker(index);
+		
 		map.flyTo(
 		    originalLatLng,
 		    19,
 		    { duration: 1.5, easeLinearity: 0.2 }
 		);
-		map.once('zoomend', () => {
-		    updateActiveMarker(index);
-		});
+		
+		
+		
         console.log('Map center:', map.getCenter());
         console.log('Marker:', markers[index].getLatLng());
 
