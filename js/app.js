@@ -442,7 +442,12 @@ function showMedia(index) {
 		    item.geometry.coordinates[1],
 		    item.geometry.coordinates[0]
 		);
-		
+		console.log('Marker position:', markers[index].getLatLng());
+
+		console.log('GeoJSON position:', L.latLng(
+		    item.geometry.coordinates[1],
+		    item.geometry.coordinates[0]
+		));
 		map.flyTo(
 		    originalLatLng,
 		    19,
