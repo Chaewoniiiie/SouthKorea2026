@@ -428,14 +428,14 @@ function showMedia(index) {
     setTimeout(() => {
 
         map.invalidateSize();
-        updateActiveMarker(index);
+        // updateActiveMarker(index);
 
         map.flyTo(
             markers[index].getLatLng(),
             19,
             { duration: 1.5,easeLinearity: 0.2 }
         );
-
+		updateActiveMarker(index);
         console.log('Map center:', map.getCenter());
         console.log('Marker:', markers[index].getLatLng());
 
