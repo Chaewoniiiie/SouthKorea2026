@@ -160,7 +160,7 @@ function createMarkers(){
         );
 		 marker.bindTooltip(
 		    `${item.properties.title || ''}<br>
-		     ${item.properties.Datum || ''}, ${item.properties.Zeit || ''}`,
+		     ${formatDateTime(item.properties.Datum,item.properties.Zeit)}`,
 		    {
 		        permanent: false,
 		        direction: 'top',
