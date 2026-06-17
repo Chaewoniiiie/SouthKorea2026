@@ -330,7 +330,15 @@ function updateActiveMarker(index){
     const direction = item.properties.direction || 0;
 
     // Add direction cone visualization
-    createDirectionCone(activeMarker.getLatLng(), direction);
+    const originalLatLng = L.latLng(
+	    item.geometry.coordinates[1],
+	    item.geometry.coordinates[0]
+	);
+	
+	createDirectionCone(
+	    originalLatLng,
+	    direction
+	);
 
     // map.setView(
     //     activeMarker.getLatLng(),
@@ -430,11 +438,16 @@ function showMedia(index) {
         map.invalidateSize();
         // updateActiveMarker(index);
 
-        map.flyTo(
-            markers[index].getLatLng(),
-            19,
-            { duration: 1.5,easeLinearity: 0.2 }
-        );
+        const originalLatLng = L.latLng(
+		    item.geometry.coordinates[1],
+		    item.geometry.coordinates[0]
+		);
+		
+		map.flyTo(
+		    originalLatLng,
+		    19,
+		    { duration: 1.5, easeLinearity: 0.2 }
+		);
 		updateActiveMarker(index);
         console.log('Map center:', map.getCenter());
         console.log('Marker:', markers[index].getLatLng());
