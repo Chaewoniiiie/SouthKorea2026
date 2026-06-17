@@ -437,7 +437,7 @@ function showMedia(index) {
 
         map.invalidateSize();
         // updateActiveMarker(index);
-
+		markerClusterGroup.unspiderfy();
         const originalLatLng = L.latLng(
 		    item.geometry.coordinates[1],
 		    item.geometry.coordinates[0]
@@ -453,7 +453,9 @@ function showMedia(index) {
 		    19,
 		    { duration: 1.5, easeLinearity: 0.2 }
 		);
-		updateActiveMarker(index);
+		map.once('zoomend', () => {
+		    updateActiveMarker(index);
+		});
         console.log('Map center:', map.getCenter());
         console.log('Marker:', markers[index].getLatLng());
 
