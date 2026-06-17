@@ -324,7 +324,7 @@ function updateActiveMarker(index){
 
     const activeMarker = markers[index];
 
-    activeMarker.setIcon(activeIcon);
+    // activeMarker.setIcon(activeIcon);
 
     const item = items[index];
     const direction = item.properties.direction || 0;
@@ -337,9 +337,10 @@ function updateActiveMarker(index){
 	
 
 	
-    // map.once('moveend', () => {
-    //     createDirectionCone(originalLatLng, direction);
-    // });
+    map.once('moveend', () => {
+        createDirectionCone(originalLatLng, direction);
+		activeMarker.setIcon(activeIcon);
+    });
 
     // map.setView(
     //     activeMarker.getLatLng(),
